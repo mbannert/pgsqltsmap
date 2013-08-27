@@ -1,0 +1,2 @@
+exportClasses(boots)
+exportMethods(createHstore)
