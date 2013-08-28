@@ -16,3 +16,4 @@ Collate:
     'boots2db.R'
     'db2boots.R'
     'helper_functions.R'
+    'initializeBootsKey.R'

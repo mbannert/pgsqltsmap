@@ -1,3 +1,36 @@
+#' Time Series Key Object
+#' 
+#' A time series keys for the \code{\link{boots}} time series
+#' format is an S4 object itself.
+#' 
+#' @section Slots:
+#'  \describe{
+#'    \item{\code{country}:}{Object of class \code{"character"}}
+#'    \item{\code{provider}:}{Object of class \code{"character"}}
+#'    \item{\code{src}:}{Object of class \code{"character"}}
+#'    \item{\code{level}:}{Object of class \code{"character"}}
+#'    \item{\code{selectedLevel}:}{Object of class \code{"character"}}
+#'    \item{\code{variable}:}{Object of class \code{"character"}}
+#'    \item{\code{item}:}{Object of class \code{"character"}}
+#'  }
+#'  
+#'  @seealso \code{\link{boots}}
+#'  @author Matthias Bannert
+#'  @exportClass bootsKey
+setClass("bootsKey",
+         representation(fullKey = "character",
+                        country = "character",
+                        provider = "character",
+                        src = "character",
+                        level = "character",
+                        selectedLevel = "character",
+                        variable = "character",
+                        item = "character"
+                        )
+         )
+
+
+
 #' Bannert's Objected Oriented Time Series
 #' 
 #' Boots is a time series format designed to be easily
@@ -7,7 +40,7 @@
 #' 
 #' @section Slots: 
 #'  \describe{
-#'    \item{\code{ts_key}:}{Object of class \code{"character"}}
+#'    \item{\code{ts_key}:}{Object of class \code{\link{bootsKey}}}
 #'    \item{\code{.Data}:}{Object of class \code{"matrix"}}
 #'    \item{\code{ts_index}:}{Object of class \code{"numeric"}}
 #'    \item{\code{md_generatedon}:}{Object of class \code{"character"}}
@@ -24,7 +57,7 @@
 #' @exportClass boots
 #' @rdname boots   
 setClass("boots",
-         representation(ts_key = "character",
+         representation(ts_key = "bootsKey",
                         .Data = "matrix",
                         ts_index = "numeric",                         
                         ts_format = "character",
@@ -63,5 +96,8 @@ setClass("tsDbResult",representation(ts_data = "data.frame",
 )
 # problem here... method behaves differently with or without zoo
 # loaded !
+
+
+
 
 

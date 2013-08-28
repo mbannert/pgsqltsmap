@@ -11,7 +11,10 @@ setMethod("initialize","boots",function(.Object,tsObj,unit=NA_character_,
   
   # mandatory properties
   if(is.zoo(tsObj) || is.ts(tsObj)){
-    .Object@ts_key <- deparse(substitute(tsObj))
+    # character based key turned into nested OO key
+     ckey <- deparse(substitute(tsObj))
+    .Object@ts_key <- new("bootsKey",ckey)
+     
     .Object@.Data <- as.matrix(tsObj)
     .Object@ts_index <- as.numeric(time(tsObj))
     .Object@md_generatedon <- as.character(Sys.Date())
@@ -22,7 +25,13 @@ setMethod("initialize","boots",function(.Object,tsObj,unit=NA_character_,
     # recommended properties 
     .Object@md_unit <- unit
     .Object@ts_format <- format
-    .Object@md_legacy_key <- legacy_key
+    if(!is.null(attributes(tsObj)$seriesNames)) {
+      .Object@md_legacy_key <- attributes(tsObj)$seriesNames
+    } else {
+      .Object@md_legacy_key <- legacy_key
+    }
+      
+    
     .Object@md_frequency <- as.character(frequency(tsObj))
     
   } else if(is.tsDbResult(tsObj)) {
@@ -34,8 +43,8 @@ setMethod("initialize","boots",function(.Object,tsObj,unit=NA_character_,
     if(is.null(unique(tsObj@ts_data$md_legacy_key))) legacy_key <- NA_character_ else
       legacy_key <-  unique(tsObj@ts_data$md_legacy_key)
     
-    
-    .Object@ts_key <- unique(tsObj@ts_data$ts_key)
+     ckey <- unique(tsObj@ts_data$ts_key)
+    .Object@ts_key <- new("bootsKey",ckey)
     .Object@.Data <- as.matrix(as.numeric(tsObj@ts_data$value))
     rownames(.Object@.Data) <- tsObj@ts_data$key
     .Object@ts_index <- as.numeric(as.Date(tsObj@ts_data$key))
