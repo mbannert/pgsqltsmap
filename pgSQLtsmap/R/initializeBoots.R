@@ -2,7 +2,8 @@ setMethod("initialize","boots",function(.Object,tsObj,unit=NA_character_,
                                         format = "%Y-%m-%d",
                                         legacy_key = NA_character_,
                                         frequency = NA_character_, 
-                                        meta_localized = NULL
+                                        meta_localized = NULL,
+                                        series_name = NA_character_
 ){
   if(!exists("zoo")) {
     warning("zoo package is not loaded, time indexes can be lost.")
@@ -12,7 +13,9 @@ setMethod("initialize","boots",function(.Object,tsObj,unit=NA_character_,
   # mandatory properties
   if(is.zoo(tsObj) || is.ts(tsObj)){
     # character based key turned into nested OO key
-     ckey <- deparse(substitute(tsObj))
+    if(is.na(series_name)) ckey <- deparse(substitute(tsObj)) else
+      ckey <- series_name
+     
     .Object@ts_key <- new("bootsKey",ckey)
      
     .Object@.Data <- as.matrix(tsObj)
@@ -63,9 +66,7 @@ setMethod("initialize","boots",function(.Object,tsObj,unit=NA_character_,
                              tsObj@meta_data$ts_language)
     meta_data.list <- lapply(meta_data.split,df2list)
     
-    meta_localized <- new("metalocalized",
-                          ts_key = unique(tsObj@ts_data$ts_key),
-                          ml_localized_list = meta_data.list)
+    meta_localized <- new("metalocalized", meta_data.list)
     
   } else {
     stop("Input is not of valid class. Only ts,zoo and tsDbResult objects are supported")

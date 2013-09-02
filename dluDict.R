@@ -10,7 +10,7 @@ item.df <- data.frame(FAME=c("an","be","g00","m00","p00","s00","%00"),
                       en=c("answers","employees","neutral","negative",
                            "positive","balance","share"))
 
-# reasonable unique question identifieres...
+# reasonable unique question identifiers...
 unqQ <- structure(list(FELD = c("F_945", "F_945", "F_945", "F_946", "F_946", 
                                 "F_946", "F_947", "F_947", "F_947", "F_948", "F_948", "F_948", 
                                 "F_949", "F_949", "F_949", "F_950", "F_950", "F_950", "F_951", 
@@ -62,7 +62,44 @@ unqQ.de <- data.frame(unqQ,title=c("Geschäftslage Urteil",
                       weighting_information = "Beschäftigungsgewicht (capped)"
                       )
 
+unqQ.de <- as.matrix(unqQ.de)
 
+# english
 
+unqQ.en <- data.frame(unqQ,title=c("Business situation assessment",
+                                   "Demand last 3 months",
+                                   "Employment last 3 months",
+                                   "Capacity utilization assessment",
+                                   "Profit situation last 3 months",
+                                   "competitive situation last 3 months",
+                                   "constraints ",
+                                   "constraints ",
+                                   "constraints ",
+                                   "constraints ",
+                                   "constraints ",
+                                   "constraints ",
+                                   "Demand next 3 months",
+                                   "Employment next 3 months",
+                                   "Pricing next 3 months",
+                                   "Business situation next 3 months"),
+                      item_levels=c("NA, positive, satisfactory, negative",
+                                    "NA, positive, satisfactory, negative",
+                                    "NA, positive, satisfactory, negative",
+                                    "NA, positive, satisfactory, negative",
+                                    "NA, positive, satisfactory, negative",
+                                    "NA, positive, satisfactory, negative",
+                                    "NA, insufficient demand",
+                                    "NA, insufficient workforce",
+                                    "NA, insufficient technical capacity",
+                                    "NA, economic and legal restrictions",
+                                    "NA, financial restrictions",
+                                    "NA, no restrictions",
+                                    "NA, positive, satisfactory, negative",
+                                    "NA, positive, satisfactory, negative",
+                                    "NA, positive, satisfactory, negative",
+                                    "NA, positive, satisfactory, negative"
+                      ),
+                      weighting_information = "Employment weighted (capped)"
+)
 
-
+unqQ.en <- as.matrix(unqQ.en)

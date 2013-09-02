@@ -29,6 +29,17 @@ setClass("bootsKey",
                         )
          )
 
+#' Class to Store Localized Meta Information
+#' 
+#' This class stores localized meta information in a
+#' nested list. Each sublist refers to one particular
+#' language. This class is rather not used directly but 
+#' as a part of the \code{\link{boots}} class.
+#' 
+#' @author Matthias Bannert
+setClass("metalocalized",representation(.Data="list",
+                                        nms="character"))
+
 
 
 #' Bannert's Objected Oriented Time Series
@@ -67,21 +78,9 @@ setClass("boots",
                         md_legacy_key = "character",
                         md_frequency = "character",
                         md_meta_localized = "metalocalized"
-         )         
-)
+         )
+  )
 
-#' Class to Store Localized Meta Information
-#' 
-#' This class stores localized meta information in a
-#' nested list. Each sublist refers to one particular
-#' language. This class is rather not used directly but 
-#' as a part of the \code{\link{boots}} class.
-#' 
-#' @author Matthias Bannert
-setClass("metalocalized",
-         representation(ts_key = "character",
-                        ml_localized_list = "list")         
-)
 
 #' Class to Store Query Results Temporarily
 #' 

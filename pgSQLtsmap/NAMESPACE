@@ -1,3 +1,6 @@
+export(boots2db)
+export(db2boots)
 exportClasses(boots)
 exportClasses(bootsKey)
 exportMethods(createHstore)
+exportMethods(getMeta)

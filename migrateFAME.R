@@ -2,118 +2,55 @@ rm(list=ls())
 load("famekey.RData")
 load("dluFame.RData")
 source("dluDict.R",echo=F)
+source("functions.R",echo=F)
 
-translateFameKey <- function(x,country="CH",
-                             provider="KOF",
-                             src="DLU",
-                             s="_",
-                             dictQ = unqQ,
-                             dictI = item.df){
-  if(!is.character(x)){
-    key <- deparse(substitute(x))  
-  } else {
-    key <- x
-  }
-  
-  pts <- unlist(strsplit(key,s))
-  l <- length(pts)
-  # country.provider.source.level.selectedLevel.variable.item
-  # remove dots
-  pts <- gsub(pattern="\\.","",pts)
-  if(length(grep("^[[:digit:]]*$", pts[2])) != 0){
-    level <- paste("NOGA_",nchar(pts[2]),"d",sep="")
-  } else {
-    if(nchar(pts[2]) == 1) level <- "letter" else level <- "group"  
-  }
-  
-  item <- dictI[dictI$FAME == pts[l],"tsdb"]
-  
-  # distinguish 3 and 4 part keys
-  if(l == 3){
-    variable <- "total"
-  } 
-  
-  if(l == 4){
-    variable <- dictQ[dictQ$F_FAME == pts[3],"FELD"]
-  }
-  
-  
-  
-  out <- paste(country,provider,src,level,pts[2],
-               variable,item,sep=".")
-  out <- toupper(out)
-  out
-  
-}
-
-# translate keys in list
+# turn environment into list and rename it using translate
 dlu.series.li <- as.list(e1)
-names(dlu.series.li) <- sapply(names(dlu.series.li),translateFameKey)
+names(dlu.series.li) <- sapply(names(dlu.series.li),
+                               translateFameKey)
 
-# initialize new series object...
-new("boots",dlu.series.li$CH.KOF.DLU.NOGA_2D.86.F_945.NEUTRAL)
-
-# create localized meta information
-createLocalMetaFromKey <- function(x,questions,items){
-  if(!is.character(x)) nm <- deparse(substitute(x)) else
-    nm <- x
-  
-  res <- list()
-  res$title <- un
-}
+CH.KOF.DLU.LETTER.R.F_950.POSITIVE <- dlu.series.li$CH.KOF.DLU.LETTER.R.F_950.POSITIVE
+test <- new("boots",CH.KOF.DLU.LETTER.R.F_950.POSITIVE)
 
 
-setClass("bootsKey",representation())
-
-
-
-attributes(dlu.series.li$CH.KOF.DLU.NOGA_2D.86.F_945.NEUTRAL)$seriesNames
-
-attributes(ts(1:10))$seriesNames
-
-
-.Object,tsObj,unit=NA_character_,
-format = "%Y-%m-%d",
-legacy_key = NA_character_,
-frequency = NA_character_, 
-meta_localized = NULL
+test2 <- new("boots",CH.KOF.DLU.LETTER.R.F_950.POSITIVE,series_name="moo")
 
 
 
 
-createBootsFromFame <- function(x){
-  key <- deparse(substitute(x))
-  dt <- getDataPart(x)
-  indx <- attributes(x)$tsp
-  
-}
+litest <- lapply(seq_along(dlu.series.li[1:10]),
+       function(y,nm,i){new("boots",tsObj=y[[i]],
+                            series_name=nm[[i]])},
+       y = dlu.series.li[1:10],
+       nm = names(dlu.series.li[1:10]))
+
+names(litest) <- names(dlu.series.li)
 
 
+# [1] "title" "selected_item" "description" "aggregation_level" "selected_group"       
+# [6] "survey" "question_wording" "item_levels" "weighting_information"
 
-saveLegacyKey <- function(x){
-  oldKey <- deparse(substitute(x))
-  attr(x,"legacy_key") <- oldKey
-  x
-}
+fullObj <- litest[[2]]
 
-b <- saveLegacyKey(e1$chdlu_49_an)
+unqQ.de
 
-attributes(e1$chdlu_49_an)
+# country.provider.src.level.selectedLevel.variable.item
 
-dlu.series.li <- as.list(e1)
-names(dlu.series.li) <- sapply(names(dlu.series.li),translateFameKey)
-dlu.series.li[1]
+# turn the following process into a list apply!
+test <- addMetaFromKey(fullObj,unqQ.de,l="de")
+test@md_meta_localized
 
-test <- sapply(names(dlu.series.li),translateFameKey)
-test[8701]
+testb <- addMetaFromKey(fullObj,unqQ.en,l="en")
+testb@md_meta_localized
 
-translateFameKey(dlunames[1])
-
-e1$chdlu_49_f1_g00
+appendMeta(test)<-testb@md_meta_localized
+test@md_meta_localized@.Data
 
 
-translateFameKey(names(as.list(e1))[1:2])
+test1 <- addMetaFromKey(test,unqQ.en,l="en")
+test1@md_meta_localized
 
-test <- names(as.list(e1))
-lapply(test,translateFameKey)
+# finetune labels a little bit... 
+# store results to database
+
 

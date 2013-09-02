@@ -19,6 +19,7 @@
 #' 
 #' @return Object of class \code{\link{boots}}.
 #' 
+#' @export
 #' @author Matthias Bannert
 db2boots <- function(conn=con,tskey,
                      data_table="timeseries_main",
