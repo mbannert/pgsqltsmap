@@ -10,10 +10,18 @@ require(pgSQLtsmap)
 
 # turn environment into list and rename it using translate
 dlu.series.li <- as.list(e1)
+
+# rubbish series in FAME: do not transfer it to new database:
+# chdlu_dummy_m
+dlu.series.li[["chdlu_dummy_m"]] <- NULL
+
 names(dlu.series.li) <- sapply(names(dlu.series.li),
                                translateFameKey)
 
-
+# duplicates check
+# b <- sapply(names(dlu.series.li),
+#        translateFameKey)
+# b[duplicated(b)]
 
 serieslist <- lapply(seq_along(dlu.series.li),
                  function(y,nm,i){new("boots",tsObj=y[[i]],
@@ -40,6 +48,15 @@ lapply(seq_along(results),
                  },
                  y = results,
                  nm = names(results))
+
+
+
+
+
+
+
+
+
 
 
 
