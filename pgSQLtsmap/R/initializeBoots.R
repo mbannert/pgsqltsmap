@@ -5,10 +5,9 @@ setMethod("initialize","boots",function(.Object,tsObj,unit=NA_character_,
                                         meta_localized = NULL,
                                         series_name = NA_character_
 ){
-  if(!exists("zoo")) {
-    warning("zoo package is not loaded, time indexes can be lost.")
-    is.zoo <- function(x) "zoo" %in% class(x)
-  } 
+   
+  
+  is.zoo <- function(x) "zoo" %in% class(x)
   
   # mandatory properties
   if(is.zoo(tsObj) || is.ts(tsObj)){
@@ -19,7 +18,8 @@ setMethod("initialize","boots",function(.Object,tsObj,unit=NA_character_,
     .Object@ts_key <- new("bootsKey",ckey)
      
     .Object@.Data <- as.matrix(tsObj)
-    .Object@ts_index <- as.numeric(time(tsObj))
+    .Object@ts_index <- .zoolike.Date.convert(tsObj)
+
     .Object@md_generatedon <- as.character(Sys.Date())
     .Object@md_generatedby <- Sys.getenv("USER")
     
