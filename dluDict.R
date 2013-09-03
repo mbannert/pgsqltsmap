@@ -1,14 +1,25 @@
 
 # reasonable item values
-item.df <- data.frame(FAME=c("an","be","g00","m00","p00","s00","%00"),
+item.df <- data.frame(FAME=c("an","be","g00","m00","p00","s00","%00",
+                             "m01","m02","p01","p02","s01","s02"),
                       tsdb=c("answers","staff_count","neutral","negative",
-                             "positive","balance","share"),
+                             "positive","balance","share","negative_X12_D11",
+                             "negative_X12_D11","positive_X12_D11",
+                             "positive_X12_D12","balance_X12_D11",
+                             "balance_X12_D12"),
                       unit=c("count","count","percent","percent","percent",
-                             "percent","percent"),
+                             "percent","percent","percent","percent","percent",
+                             "percent","percent","percent"),
                       de=c("Antworten","Beschäftigte","neutral","negativ",
-                           "positiv","Saldo","Anteil"),
+                           "positiv","Saldo","Anteil","negativ_X12_D11",
+                           "negativ_X12_D12","positiv_X12_D11","positiv_X12_D12",
+                           "Saldo_X12_D11","Saldo_X12_D12"),
                       en=c("answers","employees","neutral","negative",
-                           "positive","balance","share"))
+                           "positive","balance","share",
+                           "negative_X12_D11",
+                           "negative_X12_D12","positive_X12_D11",
+                           "positive_X12_D12",
+                           "balance_X12_D11","balance_X12_D12"))
 
 # reasonable unique question identifiers...
 unqQ <- structure(list(FELD = c("F_945", "F_945", "F_945", "F_946", "F_946", 

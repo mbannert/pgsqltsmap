@@ -58,4 +58,13 @@ setMethod("getMeta","metalocalized",function(object,lang="all"){
   
 })
 
+#' @rdname getMeta-methods
+setMethod("getMeta","boots",function(object){
+  getMeta(object@md_meta_localized)
+  
+})
+
+
+
+
 

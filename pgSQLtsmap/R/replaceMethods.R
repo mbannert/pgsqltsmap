@@ -13,9 +13,11 @@
 #' @export
 #' @docType methods
 #' @rdname replaceMeta-methods
+#' @name appendMeta
 #' @author Matthias Bannert  
 setGeneric("appendMeta<-",function(object,value){standardGeneric("appendMeta<-")})
 
+#' @name appendMeta
 #' @rdname replaceMeta-methods
 setReplaceMethod("appendMeta","metalocalized",
                  definition=function(object,value){
@@ -29,15 +31,16 @@ setReplaceMethod("appendMeta","metalocalized",
                    object
                  })
 
+#' @name appendMeta
 #' @rdname replaceMeta-methods
 setReplaceMethod("appendMeta","boots",
                  definition=function(object,value){
-                 stopifnot(class(object) %in% "boots")
-                 appendMeta(object@md_meta_localized) <- value
-                 object
+                   stopifnot(class(object) %in% "boots")
+                   appendMeta(object@md_meta_localized) <- value
+                   object
                  })
 
-
+#' @name replaceMeta
 #' @rdname replaceMeta-methods
 setGeneric("replaceMeta<-",function(object,value){standardGeneric("replaceMeta<-")})
 setReplaceMethod("replaceMeta","metalocalized",
@@ -46,7 +49,7 @@ setReplaceMethod("replaceMeta","metalocalized",
                    object@.Data <- value@.Data
                    object
                  })
-
+#' @name replaceMeta
 #' @rdname replaceMeta-methods
 setReplaceMethod("replaceMeta","boots",
                  definition=function(object,value){
@@ -54,5 +57,4 @@ setReplaceMethod("replaceMeta","boots",
                    replaceMeta(object@md_meta_localized) <- value
                    object
                  })
-
 

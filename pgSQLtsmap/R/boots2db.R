@@ -20,12 +20,17 @@
 #' @export
 #' @author Matthias Bannert
 boots2db <- function(x,conn=con,data_table="timeseries_main",
-                     meta_table="localized_meta_data"){
+                     meta_table="localized_meta_data",
+                     series_name=NA_character_){
   stopifnot(class(x) == "boots")
-  
-  # get object name
-  objName <- deparse(substitute(x))
-  
+
+  # series name needs to be specified in lapply
+  # constructions
+  if(is.na(series_name))
+    objName <- deparse(substitute(x))
+  else
+    objName <- series_name
+
   # create list of hstore objects
   hstore.list <- createHstore(x)
   
@@ -35,14 +40,13 @@ boots2db <- function(x,conn=con,data_table="timeseries_main",
   fields.data <- paste(c("ts_key","ts_data","ts_format",
                          "md_generatedon",
                          "md_generatedby","md_unit","md_legacy_key",
-                         "md_question_type",
                          "md_frequency"),
                        collapse=",")
   values.data <- paste(wrap(c(objName,hstore.list$data,x@ts_format,
                               x@md_generatedon,
                               x@md_generatedby,x@md_unit,
                               x@md_legacy_key,
-                              x@md_question_type,x@md_frequency)),
+                              x@md_frequency)),
                        collapse=",")
   
   

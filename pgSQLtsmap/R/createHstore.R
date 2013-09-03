@@ -38,7 +38,7 @@ setMethod("createHstore",
           function (Obj) 
           {
             # key value pair time series
-            nms <- rownames(getDataPart(Obj))
+            nms <- Obj@ts_index
             li <- as.list(getDataPart(Obj))
             names(li) <- nms
             kvp <- createHstore(li)
@@ -60,8 +60,8 @@ setMethod("createHstore",
           signature(Obj = "metalocalized"),
           function (Obj) 
           {
-            nl <- Obj@ml_localized_list
-            nms <- names(nl)
+            nl <- Obj@.Data
+            nms <- Obj@nms
             res <- lapply(nl,createHstore)
             names(res) <- nms
             res

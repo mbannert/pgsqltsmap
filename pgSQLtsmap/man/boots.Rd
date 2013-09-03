@@ -11,15 +11,14 @@
   \describe{ \item{\code{ts_key}:}{Object of class
   \code{\link{bootsKey}}} \item{\code{.Data}:}{Object of
   class \code{"matrix"}} \item{\code{ts_index}:}{Object of
-  class \code{"numeric"}}
-  \item{\code{md_generatedon}:}{Object of class
-  \code{"character"}} \item{\code{md_generatedby}:}{Object
+  class \code{"Date"}} \item{\code{md_generatedon}:}{Object
   of class \code{"character"}}
-  \item{\code{md_unit}:}{Object of class
-  \code{"character"}} \item{\code{md_legacy_key}:}{Object
-  of class \code{"character"}}
-  \item{\code{md_frequency}:}{Object of class
-  \code{"character"}}
+  \item{\code{md_generatedby}:}{Object of class
+  \code{"character"}} \item{\code{md_unit}:}{Object of
+  class \code{"character"}}
+  \item{\code{md_legacy_key}:}{Object of class
+  \code{"character"}} \item{\code{md_frequency}:}{Object of
+  class \code{"character"}}
   \item{\code{md_meta_localized}:}{Object of class
   \code{"metalocalized"}} }
 }

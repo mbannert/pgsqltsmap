@@ -53,7 +53,7 @@ setClass("metalocalized",representation(.Data="list",
 #'  \describe{
 #'    \item{\code{ts_key}:}{Object of class \code{\link{bootsKey}}}
 #'    \item{\code{.Data}:}{Object of class \code{"matrix"}}
-#'    \item{\code{ts_index}:}{Object of class \code{"numeric"}}
+#'    \item{\code{ts_index}:}{Object of class \code{"Date"}}
 #'    \item{\code{md_generatedon}:}{Object of class \code{"character"}}
 #'    \item{\code{md_generatedby}:}{Object of class \code{"character"}}
 #'    \item{\code{md_unit}:}{Object of class \code{"character"}}
@@ -70,7 +70,7 @@ setClass("metalocalized",representation(.Data="list",
 setClass("boots",
          representation(ts_key = "bootsKey",
                         .Data = "matrix",
-                        ts_index = "numeric",                         
+                        ts_index = "Date",                         
                         ts_format = "character",
                         md_generatedon = "character",
                         md_generatedby = "character",

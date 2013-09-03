@@ -18,3 +18,5 @@ Collate:
     'helper_functions.R'
     'initializeBootsKey.R'
     'showMethods.R'
+    'initializeMetaLocalized.R'
+    'replaceMethods.R'
