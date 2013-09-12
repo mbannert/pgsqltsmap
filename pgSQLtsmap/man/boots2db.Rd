@@ -3,7 +3,8 @@
 \title{Store Boots Objects to PostgreSQL Time Series Database}
 \usage{
   boots2db(x, conn = con, data_table = "timeseries_main",
-    meta_table = "localized_meta_data")
+    meta_table = "localized_meta_data",
+    series_name = NA_character_)
 }
 \arguments{
   \item{x}{object of class \code{\link{boots}}.}

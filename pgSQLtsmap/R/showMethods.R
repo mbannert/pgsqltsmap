@@ -50,9 +50,9 @@ setMethod("getMeta","metalocalized",function(object,lang="all"){
   
   # 
   if(lang=="all"){
-    print(dt)
+    dt
   } else {
-    print(dt[[lang]])  
+    dt[[lang]]
   }
   
   

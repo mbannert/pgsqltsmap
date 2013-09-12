@@ -53,7 +53,7 @@ ml <- list(de=list(title="Geschäftslage Urteil",
 
 
 # create object from localized list, add ts_key
-ml <- as(ml,"metalocalized")
+ml <- new("metalocalized",ml)
 
 # create class of object boots
 bseries <- new("boots",series,unit="count",

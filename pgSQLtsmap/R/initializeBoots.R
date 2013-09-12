@@ -50,7 +50,7 @@ setMethod("initialize","boots",function(.Object,tsObj,unit=NA_character_,
     .Object@ts_key <- new("bootsKey",ckey)
     .Object@.Data <- as.matrix(as.numeric(tsObj@ts_data$value))
     rownames(.Object@.Data) <- tsObj@ts_data$key
-    .Object@ts_index <- as.numeric(as.Date(tsObj@ts_data$key))
+    .Object@ts_index <- as.Date(tsObj@ts_data$key)
     
     .Object@md_generatedon <- unique(as.character(as.Date(tsObj@ts_data$md_generatedon)))
     .Object@md_generatedby <- unique(tsObj@ts_data$md_generatedby)

@@ -20,3 +20,5 @@ Collate:
     'showMethods.R'
     'initializeMetaLocalized.R'
     'replaceMethods.R'
+    'getKeysFromDb.R'
+    'simplePlot.R'

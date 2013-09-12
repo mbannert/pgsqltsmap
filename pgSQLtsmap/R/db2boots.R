@@ -25,7 +25,7 @@ db2boots <- function(conn=con,tskey,
                      data_table="timeseries_main",
                      meta_table="localized_meta_data"){
   
-  objName <- deparse(substitute(tskey))
+  objName <- tskey
   
   
   fields.data <- paste(c("ts_format","md_generatedon",
