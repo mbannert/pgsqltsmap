@@ -21,7 +21,7 @@
 #' 
 #' @export
 #' @author Matthias Bannert
-db2boots <- function(conn=con,tskey,
+db2boots <- function(tskey,conn=con,
                      data_table="timeseries_main",
                      meta_table="localized_meta_data"){
   
