@@ -42,7 +42,7 @@ is.metalocalized <- function(x) "metalocalized" %in% class(x)
 #' 
 #' @param x object whose class should be checked
 #' @author Matthias Bannert
-is.tsDbResult <- function(x) "tsDbResult" %in% class(x)
+is.tsDbResult <- function(x) inherits(x,"tsDbResult")
 
 #' Wrap characters around another character
 #' 

@@ -7,7 +7,7 @@ setMethod("initialize","boots",function(.Object,tsObj,unit=NA_character_,
 ){
    
   
-  is.zoo <- function(x) "zoo" %in% class(x)
+  is.zoo <- function(x) inherits(x,"zoo")
   
   # mandatory properties
   if(is.zoo(tsObj) || is.ts(tsObj)){
