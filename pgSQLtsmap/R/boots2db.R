@@ -19,7 +19,7 @@
 #' 
 #' @export
 #' @author Matthias Bannert
-boots2db <- function(x,conn=con,data_table="timeseries_main",
+boots2db <- function(x,conn,data_table="timeseries_main",
                      meta_table="localized_meta_data",
                      series_name=NA_character_){
   stopifnot(class(x) == "boots")
