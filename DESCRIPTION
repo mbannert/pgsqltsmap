@@ -1,0 +1,24 @@
+Package: pgSQLtsmap
+Title: Map S4 class based time series to a PostgreSQL database
+Description: CRUD object oriented R time series and interact with a PostgreSQL
+    database.
+Version: 0.1
+Authors@R: 'Matthias Bannert <matthias.bannert@gmail.com> [aut, cre]'
+Depends:
+    R (>= 3.0.1),methods,RPostgreSQL
+License: GPL-2
+LazyData: true
+Collate:
+    'classDefintions.R'
+    'pgSQLtsmap-package.r'
+    'createHstore.R'
+    'initializeBoots.R'
+    'boots2db.R'
+    'db2boots.R'
+    'helper_functions.R'
+    'initializeBootsKey.R'
+    'showMethods.R'
+    'initializeMetaLocalized.R'
+    'replaceMethods.R'
+    'getKeysFromDb.R'
+    'simplePlot.R'
