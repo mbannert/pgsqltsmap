@@ -17,53 +17,41 @@
 #' @export
 #' @docType methods
 #' @rdname createHstore-methods   
-setGeneric("createHstore",function(Obj) stopifnot(is.list(Obj)))
+setGeneric("create_hstore",function(Obj) stopifnot(inherits(Obj,c("zoo","ts","mi_local"))))
 
-#' @rdname createHstore-methods   
-setMethod("createHstore",signature(Obj = "list"),
+
+#' @rdname createHstore-methods
+setMethod("create_hstore",signature(Obj = "ts"),
           function(Obj){
-                        nm <- names(Obj)
-                        v <- unlist(Obj)
-                        v <- wrap(v,'"')
-  
-                        res <- paste(nm,v,sep=" => ")
-                        res <- paste(res,collapse=",")
-                        res
+            t_index <- .zoolike.Date.convert(Obj)
+            res <- paste(t_index,Obj,sep = " => ")
+            res <- wrap(res,"'")
+            res <- paste(res,collapse=",")
+            res
           }
 )
 
+
 #' @rdname createHstore-methods
-setMethod("createHstore",
-          signature(Obj = "boots"),
-          function (Obj) 
-          {
-            # key value pair time series
-            nms <- Obj@ts_index
-            li <- as.list(getDataPart(Obj))
-            names(li) <- nms
-            kvp <- createHstore(li)
-            
-            # localized meta information
-            ml <- Obj@md_meta_localized
-            ml.res <- createHstore(ml)
-            
-            # create output
-            out <- list()
-            out[["data"]] <- kvp
-            out[["meta_data"]] <- ml.res
+setMethod("create_hstore",signature(Obj = "mi_local"),
+          function(Obj){
+            langs <- ls(Obj)
+            if(length(langs) == 0){
+              stop("No localized meta information available")
+            } else {
+              out <- list()
+              # loop over all languages
+              for (i in 1:length(langs)){
+                res <- paste(keys(Obj[[langs[i]]]),keys(Obj[[langs[i]]]),sep = " => ") 
+                res <- wrap(res,"'")
+                res <- paste(res,collapse=",")
+                out[[i]] <- res
+              }
+            }
+            # give list of hstores back, one per language
+            names(out) <- langs
             out
           }
 )
 
-#' @rdname createHstore-methods
-setMethod("createHstore",
-          signature(Obj = "metalocalized"),
-          function (Obj) 
-          {
-            nl <- Obj@.Data
-            nms <- Obj@nms
-            res <- lapply(nl,createHstore)
-            names(res) <- nms
-            res
-          }
-)
+
