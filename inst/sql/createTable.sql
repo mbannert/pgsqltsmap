@@ -23,11 +23,10 @@ foreign key (ts_key) references timeseries_main (ts_key));
 CREATE TABLE timeseries_sets (ts_set_key varchar,
 ts_set_label varchar,
 ts_set_description varchar,
-primary key (ts_set_key)
+primary key (ts_set_key));
 
-CREATE TABLE ts_key_ts_set_key (ts_key varchar,
-ts_set_key)
-primary key (ts_key varchar,ts_set_key varchar)
-foreign key (ts_key) references timseries_main (ts_key)
-foreign key (ts_set_key) references timeseries_sets (ts_set_key)
-
+dbGetQuery(con,"CREATE TABLE ts_key_ts_set_key (ts_key varchar, ts_set_key varchar,
+primary key (ts_key, ts_set_key),
+foreign key (ts_key) references timeseries_main (ts_key),
+foreign key (ts_set_key) references timeseries_sets (ts_set_key));
+")
