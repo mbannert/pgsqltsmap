@@ -25,7 +25,7 @@ setMethod("create_hstore",signature(Obj = "ts"),
           function(Obj){
             t_index <- .zoolike.Date.convert(Obj)
             res <- paste(t_index,Obj,sep = " => ")
-            res <- wrap(res,"'")
+          #  res <- wrap(res,"'")
             res <- paste(res,collapse=",")
             res
           }
@@ -42,7 +42,7 @@ setMethod("create_hstore",signature(Obj = "mi_local"),
               out <- list()
               # loop over all languages
               for (i in 1:length(langs)){
-                res <- paste(keys(Obj[[langs[i]]]),keys(Obj[[langs[i]]]),sep = " => ") 
+                res <- paste(keys(Obj[[langs[i]]]),values(Obj[[langs[i]]]),sep = " => ") 
                 res <- wrap(res,"'")
                 res <- paste(res,collapse=",")
                 out[[i]] <- res

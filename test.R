@@ -25,7 +25,8 @@ meta$CH.KOF.TEST.REGION.ZH.VAR1.ITEM1$add_localized_mi("en",localized_labels_en,
 meta$CH.KOF.TEST.REGION.ZH.VAR1.ITEM1$add_localized_mi("de",localized_labels_de,
                                                        localized_items_de)
 
-meta$CH.KOF.TEST.REGION.ZH.VAR1.ITEM1$ts_localized_mi$en
+meta$CH.KOF.TEST.REGION.ZH.VAR1.ITEM1$ts_localized_mi$de$mögliche_Antworten
+
 
 
 
