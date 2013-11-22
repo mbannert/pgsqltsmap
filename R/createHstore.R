@@ -24,7 +24,8 @@ setGeneric("create_hstore",function(Obj) stopifnot(inherits(Obj,c("zoo","ts","mi
 setMethod("create_hstore",signature(Obj = "ts"),
           function(Obj){
             t_index <- .zoolike.Date.convert(Obj)
-            res <- paste(t_index,Obj,sep = " => ")
+            res <- paste(wrap(t_index,'"'),
+                         wrap(Obj,'"'),sep = " => ")
           #  res <- wrap(res,"'")
             res <- paste(res,collapse=",")
             res
@@ -42,8 +43,8 @@ setMethod("create_hstore",signature(Obj = "mi_local"),
               out <- list()
               # loop over all languages
               for (i in 1:length(langs)){
-                res <- paste(keys(Obj[[langs[i]]]),values(Obj[[langs[i]]]),sep = " => ") 
-                res <- wrap(res,"'")
+                res <- paste(wrap(keys(Obj[[langs[i]]]),'"'),
+                             wrap(values(Obj[[langs[i]]]),'"'),sep = " => ") 
                 res <- paste(res,collapse=",")
                 out[[i]] <- res
               }
