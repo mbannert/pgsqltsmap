@@ -11,7 +11,7 @@ require(caroline)
 archive_new_ts(c("CH.KOF.TEST.REGION.ZH.VAR1.ITEM1","ts2"))
 
 
-update_localized_mi <- function(con,Obj,meta_env_name="meta"){
+update_localized_mi <- function(con,Obj,meta_env_name="meta",overwrite=F){
   # check Object
   if(is.character(Obj)){
     nm <- Obj
@@ -42,7 +42,25 @@ update_localized_mi <- function(con,Obj,meta_env_name="meta"){
     # locally in R
     lang_in_mem <- ls(get(meta_env_name)[[mi_key]]$ts_localized_mi)
     
-    lang_in_mem %in% t(lang_in_db) 
+    # if overwrite is set to TRUE, the entire localized meta object is replaced
+    # by the one that's stored in the r session for a particular object
+    if(overwrite == T){
+      del_statement  <- paste("DELETE FROM localized_meta_data WHERE ts_key='",
+                              mi_key,"'",sep="")
+      out[[2]] <- dbGetQuery(con,del_statement)
+      out[[3]] <- dbWriteTable(con,"localized_meta_data",
+                               create_db_table(mi_key,type="meta"),
+                               append=T,row.names=F)
+    } else {
+      # if overwrite is FALSE only update those who are not in the database yet
+      # in the 
+      not_in_db <- lang_in_mem[!(lang_in_mem %in% t(lang_in_db))]
+      
+      cat("do nothing.")
+    }
+    
+    # 
+    
     
     
   } else {
@@ -61,18 +79,22 @@ update_localized_mi <- function(con,Obj,meta_env_name="meta"){
 #                                 "WHERE ts_key = ",)
 #   lang_in_db <- dbGetQuery(conn=con,paste("SELECT ")
   
-  
+  not_in_db
   
 }
 
 ts3 <- rnorm(1:200)
 add_mi(ts3)
 
+
+# shall we be able to update a particular language? by specifying??
 tst <- update_localized_mi(con,CH.KOF.TEST.REGION.ZH.VAR1.ITEM1)
 
 match(t(tst),c("de","en"))
 
 t(tst) %in% c("de","en")
+
+
 
 
 
