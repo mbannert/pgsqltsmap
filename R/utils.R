@@ -11,17 +11,17 @@
 #' meta information or main data be generated. 
 #' @param meta_env_name character name of the environment that stores the
 #' metainformation
-create_df_lines <- function(Obj,type="main",meta_env_name = "meta"){
+create_df_lines <- function(Obj,type="main",meta_env_name = "meta",
+                            vintage_key=NA_character_){
   if(is.character(Obj)){
     nm <- Obj
     Obj <- get(Obj)
-  }
+  } 
   mi_key <- attr(Obj,"mi_key")
   # throw an error if there is no key attribute
   if(is.null(mi_key)){
-    stop_statement <- paste("There is no meta information attached to the key:'",
-                            nm,
-                            "'. \nStoring to archive is not allowed without meta information.",
+    stop_statement <- paste("There is no meta information attached to this object.
+Storing to archive is not allowed without meta information.",
                             sep="")
     stop(stop_statement)
   }
@@ -54,12 +54,26 @@ create_df_lines <- function(Obj,type="main",meta_env_name = "meta"){
       )  
       # return
       meta_localized
-    }
-  } else {
-    stop("invalid type, only 'main' or 'meta' allowed.")
+      }
+    } else if(type == "vintage"){
+      # throw an exception if there's no vintage key specified.
+      if(is.na(vintage_key)){
+        stop("No vintage key specified. Can't prepare entry for vintage
+database.")
+      }
+      # prepare data.frame for use with dbWriteTable.
+      vintage_hstore <- create_hstore(Obj)
+      vintage <- data.frame(ts_key = mi_key,
+                            vintage_key = vintage_key,
+                            vintage_data = vintage_hstore)
+      #return
+      vintage
+    } else {
+    stop("invalid type, only 'main','vintage' or 'meta' allowed.")
   } 
   
 }
+
 
 #' Create Table From Time Series
 #' 
@@ -70,10 +84,15 @@ create_df_lines <- function(Obj,type="main",meta_env_name = "meta"){
 #' @param type character based flag, either main or meta. Should localized 
 #' meta information or main data be generated. 
 #' @param meta_env_name character name of the environment that stores the
-#' metainformation
+#' meta information
 #' @author Matthias Bannert
+#' @note Write a better version of this function that supports objects and 
+#' object names(just like its helper function). Currently ts_keys only supports
+#' character vectors.
 create_db_table <- function(ts_keys,type="main",
-                            meta_env_name = meta_env_name){
-  out <- ldply(ts_keys,create_df_lines,type=type)
+                            meta_env_name = meta_env_name,...){
+  vintage_key <- unlist(list(...))
+  out <- ldply(ts_keys,create_df_lines,type=type,
+               vintage_key=vintage_key)
   out
 }

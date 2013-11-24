@@ -96,8 +96,12 @@ t(tst) %in% c("de","en")
 
 
 
+create_db_table("CH.KOF.TEST.REGION.ZH.VAR1.ITEM1","vintage",vintage_key="run1")
+add_vintage_to_db(con,"CH.KOF.TEST.REGION.ZH.VAR1.ITEM1",
+                  vintage_key="run1")
 
 
+create_df_lines
 
 
 
