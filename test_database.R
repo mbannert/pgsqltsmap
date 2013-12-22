@@ -7,8 +7,37 @@ source("localConnect.R")
 
 require(caroline)
 
+CH.KOF.TEST.REGION.ZH.VAR1.ITEM2 <- ts(rexp(100),start(1983,3),frequency=4)
+add_mi(CH.KOF.TEST.REGION.ZH.VAR1.ITEM2)
 
-archive_new_ts(c("CH.KOF.TEST.REGION.ZH.VAR1.ITEM1","ts2"))
+archive_new_ts(c("CH.KOF.TEST.REGION.ZH.VAR1.ITEM2"))
+
+
+# some read stuff
+require(miro)
+out <- search_db_for_keys("CH","KOF",conn=con)
+class(out)
+
+tst <- result_set()
+
+
+save_keys <- function(rs,keys){
+  rs$add_series(keys,vintage_keys = list(),
+                meta_env_name="meta")
+}
+
+save_keys(tst,out)
+
+
+tst$add_selection()
+
+t
+result_set
+
+inherits(tst,"result_set")
+
+
+
 
 
 
@@ -16,19 +45,10 @@ ts3 <- rnorm(1:200)
 add_mi(ts3)
 
 
-# shall we be able to update a particular language? by specifying??
+# overwrite option... still has a problem, bugfix later.
 update_localized_mi(con,"CH.KOF.TEST.REGION.ZH.VAR1.ITEM1")
 
-
-
-match(t(tst),c("de","en"))
-
-t(tst) %in% c("de","en")
-
-
-
-create_db_table("CH.KOF.TEST.REGION.ZH.VAR1.ITEM1","vintage",vintage_key="run1")
-add_vintage_to_db(con,"CH.KOF.TEST.REGION.ZH.VAR1.ITEM1",
+add_vintage_to_db(con,"ts3",
                   vintage_key="run1")
 
 

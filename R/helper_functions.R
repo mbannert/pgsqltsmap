@@ -44,19 +44,6 @@ is.metalocalized <- function(x) "metalocalized" %in% class(x)
 #' @author Matthias Bannert
 is.tsDbResult <- function(x) inherits(x,"tsDbResult")
 
-#' Wrap characters around another character
-#' 
-#' @export
-wrap <- function(x,char="'"){
-  paste(char,x,char,sep="")
-}
-
-#' Wrap opening and closing characters around another character
-#' 
-#' @export
-addTag <- function(x,open,close){
-  paste(open,x,close,sep="")
-}
 
 
 

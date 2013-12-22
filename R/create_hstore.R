@@ -32,6 +32,21 @@ setMethod("create_hstore",signature(Obj = "ts"),
           }
 )
 
+#' @rdname createHstore-methods
+setMethod("create_hstore",signature(Obj = "zooreg"),
+          function(Obj){
+            t_index <- .zoolike.Date.convert(Obj)
+            res <- paste(wrap(t_index,'"'),
+                         wrap(Obj,'"'),sep = " => ")
+            #  res <- wrap(res,"'")
+            res <- paste(res,collapse=",")
+            res
+          }
+)
+
+
+
+
 
 #' @rdname createHstore-methods
 setMethod("create_hstore",signature(Obj = "mi_local"),
