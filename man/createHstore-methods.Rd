@@ -1,6 +1,6 @@
 \docType{methods}
-\name{createHstore}
-\alias{createHstore}
+\name{create_hstore}
+\alias{create_hstore}
 \title{Create Postgres Hstore Representation of R objects}
 \arguments{
   \item{Obj}{R object. Accepts objects of class

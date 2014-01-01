@@ -1,2 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+localConnect.R
+test.R
+test_database.R
+test_env2db.R

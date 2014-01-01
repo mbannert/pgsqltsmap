@@ -1,12 +1,12 @@
-\name{getKeysFromDb}
-\alias{getKeysFromDb}
-\title{Get one or multiple key from database by chunks}
+\name{search_db_for_keys}
+\alias{search_db_for_keys}
+\title{Get one or multiple keys from database by chunks}
 \usage{
-  getKeysFromDb(..., conn = con,
+  search_db_for_keys(..., conn,
     relation = "timeseries_main")
 }
 \arguments{
-  \item{...}{chunks of class character that should be use
+  \item{...}{chunks of class character that should be used
   to narrow down selected keys}
 
   \item{conn}{a postgreSQL connection object}
@@ -17,8 +17,5 @@
 }
 \author{
   Matthias Bannert
-}
-\seealso{
-  \code{\link{boots2db} and \code{\link{bootsKey}}}
 }
 

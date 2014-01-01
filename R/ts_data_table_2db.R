@@ -6,7 +6,7 @@
 #' @param con database connection object
 #' @param dt a data.table created by \code{\link{env2data.table}}
 #' @param tab name of the database table
-#' @parm overwrite boolean remove existing rows of the same key in the database,
+#' @param overwrite boolean remove existing rows of the same key in the database,
 #' defaults to FALSE
 #' @seealso \code{\link{env2data.table}}
 #' @author Matthias Bannert
