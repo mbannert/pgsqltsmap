@@ -9,6 +9,10 @@
 #' @param ts_key character time series key
 #' @param environment that contains the time series
 #' @param meta_env_name name of the meta environment
+#' @param answer_label chunk that denotes answer in keys, defaults to "AN"
+#' @param restriction minimum number of firms needed to set restriction
+#' to FALSE, defaults to 5
+#' 
 #' @author Matthias Bannert
 #' @seealso \code{\link{rbindList}},\code{\link{ts_env2data.table}}
 create_line <- function(ts_key,ts_env,meta_env_name,answer_label="AN",

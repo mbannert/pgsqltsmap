@@ -14,10 +14,14 @@
 #' in the local R object be overwritten, defaults to TRUE,
 #' @param meta_env_name name of the environment that contains the meta
 #' information
+#' @param restr minimum number of firms needed to set restriction to FALSE,
+#' defaults to 5. 
+#' @param ans_label chunk label to denote answers in ts_key.
 #' @author Matthias Bannert
 #' @seealso \code{\link{create_line}},\code{\link{add_mi}}
 #' @export
-ts_env2data.table <- function(ts_env_name,overwrite=T,meta_env_name="meta"){
+ts_env2data.table <- function(ts_env_name,overwrite=T,meta_env_name="meta",
+                              restr=5,ans_label="AN"){
   # list all element names of the given environments, i.e. all names of the 
   # time series
   series <- ls(envir=get(ts_env_name))
@@ -31,7 +35,9 @@ ts_env2data.table <- function(ts_env_name,overwrite=T,meta_env_name="meta"){
   out <- data.table::rbindlist(lapply(series,
                                       create_line,
                                       ts_env=get(ts_env_name),
-                                      meta_env_name=meta_env_name))
+                                      meta_env_name=meta_env_name,
+                                      restriction = restr,
+                                      answer_label = ans_label))
   paste(length(l),"meta objects created.")
   out
 }
