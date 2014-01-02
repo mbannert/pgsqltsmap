@@ -6,7 +6,7 @@ md_generated_on varchar,
 md_legacy_key varchar,
 md_source varchar,
 md_notes varchar,
-md_restrictions
+md_restrictions hstore
 );
 
 CREATE TABLE localized_meta_data (ts_key varchar,
